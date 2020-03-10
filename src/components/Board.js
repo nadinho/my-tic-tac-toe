@@ -3,13 +3,24 @@ import Square from "./Square";
 
 export default function Board() {
   const [squares, setSquares] = React.useState(Array(9).fill(null));
-  const status = "Next player: X";
+  const [xIsNext, setXIsNext] = React.useState(true);
+
+
+  {/*  Andere Schreibweise
+    const player = xIsNext ? "❌" : "⭕";
+    const status = `Next player: ${player}`;
+*/}
+ 
+
+  const status = "Next player: " + (xIsNext ? "❌" : "⭕");
 
   function handleClick(squareIndex) {
     const squaresCopy = squares.slice();
-    squaresCopy[squareIndex] = "✖️";
+    squaresCopy[squareIndex] = xIsNext ? "❌" : "⭕️";
+    setXIsNext(!xIsNext);
     setSquares(squaresCopy);
   }
+
   return (
     <div>
       <div className="status">{status}</div>
